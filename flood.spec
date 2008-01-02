@@ -17,6 +17,7 @@ BuildRequires:	apache-devel
 BuildRequires:	docbook-style-xsl
 BuildRequires:	libxslt-proc
 Requires:	openssl
+BuildRoot:	%{_tmppath}/%{name}-%{version}-build
 
 %description
 Flood is a profile-driven HTTP load tester. It can be used to
