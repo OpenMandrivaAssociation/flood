@@ -1,32 +1,34 @@
-%define snap r500244
+%define snap r647777
 
 Summary:	A benchmarking tool for Apache2
 Name:		flood
 Version:	1.1
-Release:	%mkrel 0.%{snap}.3
+Release:	%mkrel 0.%{snap}.1
 License:	Apache License
 Group:		System/Servers
 URL:		http://httpd.apache.org/test/flood/
-Source0:	flood-1.1-%{snap}.tar.bz2
+Source0:	flood-1.1-%{snap}.tar.gz
 Patch0:		flood-openssl-version.diff
+Patch1:		flood-gcc42x.diff
 BuildRequires:	autoconf2.5
 BuildRequires:	automake1.7
-BuildRequires:	apr-devel >= 1.2.2
-BuildRequires:	apr-util-devel >= 1.2.2
+BuildRequires:	apr-devel >= 1.2.12
+BuildRequires:	apr-util-devel >= 1.2.12
 BuildRequires:	apache-devel
 BuildRequires:	docbook-style-xsl
 BuildRequires:	libxslt-proc
 Requires:	openssl
-BuildRoot:	%{_tmppath}/%{name}-%{version}-build
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-Flood is a profile-driven HTTP load tester. It can be used to
-gather important performance metrics for your website.
+Flood is a profile-driven HTTP load tester. It can be used to gather important
+performance metrics for your website.
 
 %prep
 
 %setup -q -n flood
 %patch0
+%patch1 -p1
 
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type f -perm 0555 -exec chmod 755 {} \;
@@ -37,17 +39,11 @@ for i in `find . -type d -name .svn`; do
 done
 
 %build
-#########################################################################################
-# configure and build phase
-#
-
 export WANT_AUTOCONF_2_5=1
 #libtoolize --copy --force; aclocal-1.7; autoconf; automake-1.7 --add-missing
 autoconf
 
 %serverbuild
-
-export CFLAGS="%{optflags}"
 
 # We need to re-run ./buildconf because of any applied patch(es)
 #./buildconf
@@ -68,9 +64,6 @@ xsltproc -o manual/ %{_datadir}/sgml/docbook/xsl-stylesheets/xhtml/chunk.xsl doc
 
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot} 
-#########################################################################################
-# install phase
-#
 
 install -d %{buildroot}%{_sbindir}
 install -d %{buildroot}%{_sysconfdir}/pki/flood/private
@@ -87,5 +80,3 @@ install -m0755 flood %{buildroot}%{_sbindir}/
 %dir %{_sysconfdir}/pki/flood
 %dir %{_sysconfdir}/pki/flood/private
 %attr(0755,root,root) %{_sbindir}/flood
-
-
