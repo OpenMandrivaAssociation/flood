@@ -1,4 +1,4 @@
-%define snap r698121
+%define snap r719568
 
 Summary:	A benchmarking tool for Apache2
 Name:		flood
