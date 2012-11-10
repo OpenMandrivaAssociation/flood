@@ -1,0 +1,11 @@
+--- configure.in	2008-04-14 14:56:14.000000000 +0200
++++ configure.in.oden	2008-09-23 12:24:50.000000000 +0200
+@@ -142,7 +142,7 @@
+ CPPFLAGS="$CPPFLAGS `$apu_config --includes`"
+ LIBTOOL_LDFLAGS="$LIBTOOL_LDFLAGS `$apu_config --ldflags`"
+ dnl Since libaprutil relies on libapr, it *must* appear before -lapr.
+-LIBTOOL_LIBS="`$apu_config --link-libtool --libs` $LIBTOOL_LIBS"
++LIBTOOL_LIBS="`$apu_config --link-libtool` $LIBTOOL_LIBS"
+ APU_CONFIG="$apu_config"
+ 
+ AC_CHECK_FUNC(strtoll, hasstrtoll="1", hasstrtoll="0")
