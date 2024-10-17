@@ -6,7 +6,7 @@ Version:	1.1
 Release:	%mkrel 3.%{snap}.5
 License:	Apache License
 Group:		System/Servers
-URL:		http://httpd.apache.org/test/flood/
+URL:		https://httpd.apache.org/test/flood/
 Source0:	flood.tar.gz
 Patch0:		flood-openssl-version.diff
 Patch1:		flood-less_linkage_fix.diff
