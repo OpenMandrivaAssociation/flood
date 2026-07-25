@@ -3,7 +3,7 @@
 Summary:	A benchmarking tool for Apache2
 Name:		flood
 Version:	1.1
-Release:	%mkrel 3.%{snap}.5
+Release:	3.%{snap}.6
 License:	Apache License
 Group:		System/Servers
 URL:		https://httpd.apache.org/test/flood/
